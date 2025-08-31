@@ -14,8 +14,6 @@
 - [Environment Variables](#environment-variables)  
 - [Usage](#usage)  
 - [API Endpoints](#api-endpoints)  
-- [Contributing](#contributing)  
-- [License](#license)  
 
 ---
 
@@ -109,4 +107,80 @@ investo/
 ```
 
 ---
+
+## Setup & Installation
+
+### Frontend (Next.js)
+
+1. **Clone the repository**
+git clone <repo_url>
+cd investo/web
+
+2. **Install dependencies**
+npm install
+
+3. **Run the development server**
+npm run dev
+
+Open your browser at http://localhost:3000 to view the frontend.
+
+---
+
+### Backend (FastAPI)
+
+1. **Navigate to the backend folder**
+cd investo/backend
+
+2. **Create a virtual environment**
+python -m venv venv
+
+3. **Activate the virtual environment**
+- On Linux/Mac: source venv/bin/activate
+- On Windows: venv\Scripts\activate
+
+4. **Install backend dependencies**
+pip install -r requirements.txt
+
+5. **Run FastAPI server**
+uvicorn app.main:app --reload
+
+The backend will now run at http://localhost:8000.
+
+---
+
+### Database (NeonDB + Prisma)
+
+1. Ensure your NeonDB Postgres database is set up.  
+
+2. **Configure environment variables**
+- Frontend: .env.local  
+- Backend: .env
+
+3. **Run Prisma migrations**
+cd investo/web
+npx prisma migrate dev
+
+This will create all necessary tables and schema in your NeonDB database.
+
+---
+
+## Usage
+
+1. Open the app in your browser: http://localhost:3000  
+2. Sign up or log in using **Clerk Auth**  
+3. Add investments to your portfolio (stocks or metals)  
+4. Go to **Dashboard → Chat** to get AI-powered guidance on your portfolio  
+5. View real-time charts, portfolio summaries, and historical performance  
+
+---
+
+## API Endpoints (FastAPI)
+
+| Endpoint                | Method               | Description                                  |
+|-------------------------|--------------------|----------------------------------------------|
+| `/api/news`             | GET                | Fetch historical news data                  |
+| `/api/metals`           | GET                | Fetch metal rates                           |
+| `/api/stocks`           | GET                | Fetch stock prices                           |
+| `/api/portfolio`        | GET / POST / PUT / DELETE | Manage user portfolio                     |
+| `/api/ai/guidance`      | POST               | Get AI-powered investment guidance          |
 
