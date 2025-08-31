@@ -10,8 +10,7 @@
 - [Architecture](#architecture)  
 - [Technologies](#technologies)  
 - [Folder Structure](#folder-structure)  
-- [Setup & Installation](#setup--installation)  
-- [Environment Variables](#environment-variables)  
+- [Setup & Installation](#setup--installation)   
 - [Usage](#usage)  
 - [API Endpoints](#api-endpoints)  
 
@@ -113,14 +112,25 @@ investo/
 ### Frontend (Next.js)
 
 1. **Clone the repository**
-git clone <repo_url>
+```bash
+git clone https://github.com/DhruvilShiroiya/investo.git
+```
+```bash
 cd investo/web
-
+```
 2. **Install dependencies**
+```bash
 npm install
-
-3. **Run the development server**
+```
+3. **Environment Variables**
+```bash
+cd investo/web
+touch .env.local
+```
+4. **Run the development server**
+```bash
 npm run dev
+```
 
 Open your browser at http://localhost:3000 to view the frontend.
 
@@ -135,17 +145,29 @@ cd investo/backend
 ```
 
 2. **Create a virtual environment**
+```bash
 python -m venv venv
+```
 
 3. **Activate the virtual environment**
 - On Linux/Mac: source venv/bin/activate
 - On Windows: venv\Scripts\activate
 
 4. **Install backend dependencies**
+```bash
 pip install -r requirements.txt
+```
 
-5. **Run FastAPI server**
+5. **Environment Variables**
+```bash
+cd investo/backend
+touch .env
+```
+
+6. **Run FastAPI server**
+```bash
 uvicorn app.main:app --reload
+```
 
 The backend will now run at http://localhost:8000.
 
@@ -155,13 +177,11 @@ The backend will now run at http://localhost:8000.
 
 1. Ensure your NeonDB Postgres database is set up.  
 
-2. **Configure environment variables**
-- Frontend: .env.local  
-- Backend: .env
-
-3. **Run Prisma migrations**
+2. **Run Prisma migrations**
+```bash
 cd investo/web
 npx prisma migrate dev
+```
 
 This will create all necessary tables and schema in your NeonDB database.
 
@@ -177,7 +197,18 @@ This will create all necessary tables and schema in your NeonDB database.
 
 ---
 
-## API Endpoints (FastAPI)
+## API Endpoints (Next.js)
+
+| Endpoint                | Method               | Description                                  |
+|-------------------------|--------------------|----------------------------------------------|
+| `/api/news`             | GET                | Fetch historical news data                  |
+| `/api/metals`           | GET                | Fetch metal rates                           |
+| `/api/stocks`           | GET                | Fetch stock prices                           |
+| `/api/portfolio`        | GET / POST / PUT / DELETE | Manage user portfolio                     |
+| `/api/ai/guidance`      | POST               | Get AI-powered investment guidance          |
+
+
+## API Endpoints (Fast API)
 
 | Endpoint                | Method               | Description                                  |
 |-------------------------|--------------------|----------------------------------------------|
