@@ -2,8 +2,6 @@
 
 **Investo** is a personal investment portfolio guidance platform that helps users make informed decisions between **stocks** and **metals** investments. It leverages historical news data, market trends, and AI/ML-powered models to provide portfolio insights and guidance through an intelligent chatbot interface.  
 
-This project was developed as a **Last Year (LY) project** using modern web technologies.
-
 ---
 
 ## Table of Contents
@@ -74,39 +72,61 @@ Investo follows a **modular, monorepo structure**:
 **Deployment / Dev Tools**:  
 - Docker / Docker Compose  
 - Git & GitHub  
-- Node.js / PNPM  
+- Node.js / npm  
 
 ---
 
 ## Folder Structure
 
+```text
 investo/
-├── web/ # Next.js frontend
-│ ├── app/ # Routes & pages (page.tsx + layout.tsx)
-│ ├── components/ # Reusable React components
-│ ├── features/ # Feature-based modules (auth, portfolio, chat)
-│ ├── lib/ # Utils (Prisma client, API wrappers, helpers)
-│ ├── prisma/ # Prisma schema & migrations
-│ ├── hooks/ # Custom React hooks
-│ ├── shadcn/ # shadcn UI components
-│ └── styles/ # Tailwind / CSS
+├── web/                        # Next.js frontend
+│   ├── app/                    # Routes & pages (page.tsx + layout.tsx)
+│   ├── components/             # Reusable React components
+│   ├── features/               # Feature-based modules (auth, portfolio, chat)
+│   ├── lib/                    # Utils (Prisma client, API wrappers, helpers)
+│   ├── prisma/                 # Prisma schema & migrations
+│   ├── hooks/                  # Custom React hooks
+│   ├── shadcn/                 # shadcn UI components
+│   └── styles/                 # Tailwind / CSS
 │
-├── backend/ # FastAPI backend
-│ ├── app/
-│ │ ├── api/ # REST endpoints (news, metals, stocks, portfolio, AI)
-│ │ ├── core/ # Config, constants, middleware
-│ │ ├── models/ # Pydantic / SQLAlchemy models
-│ │ ├── services/ # ML/DL / AI logic
-│ │ ├── utils/ # Helper functions
-│ │ └── main.py # FastAPI entrypoint
-│ ├── tests/ # Backend tests
-│ ├── requirements.txt # Python dependencies
-│ └── Dockerfile # Containerization
+├── backend/                     # FastAPI backend
+│   ├── app/
+│   │   ├── api/                # REST endpoints (news, metals, stocks, portfolio, AI)
+│   │   ├── core/               # Config, constants, middleware
+│   │   ├── models/             # Pydantic / SQLAlchemy models
+│   │   ├── services/           # ML/DL / AI logic
+│   │   ├── utils/              # Helper functions
+│   │   └── main.py             # FastAPI entrypoint
+│   ├── tests/                  # Backend tests
+│   ├── requirements.txt        # Python dependencies
+│   └── Dockerfile              # Containerization
 │
-├── docker-compose.yml # Optional: run web + backend + DB locally
-├── .env.local # Environment variables (frontend + backend)
+├── docker-compose.yml           # Optional: run web + backend + DB locally
+├── .env.local                   # Environment variables (frontend + backend)
 └── README.md
 
+---
+
+## Setup & Installation
+
+### Frontend (Next.js)
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/DhruvilShiroiya/investo.git
+cd investo/web
+
+2. **Install dependencies**
+
+```bash
+npm install
+
+3. **Run the development server**
+
+```bash
+npm run dev
 
 
 
