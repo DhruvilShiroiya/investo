@@ -1,2 +1,2 @@
-# Investo
+# investo
 LY project 
