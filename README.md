@@ -129,7 +129,10 @@ Open your browser at http://localhost:3000 to view the frontend.
 ### Backend (FastAPI)
 
 1. **Navigate to the backend folder**
+
+```bash
 cd investo/backend
+```
 
 2. **Create a virtual environment**
 python -m venv venv
