@@ -34,7 +34,7 @@ const HeroSection = () => {
           and get AI-powered portfolio guidance based on historical data and
           news sentiment.
         </p>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
           <Button size="lg" className="rounded-2xl border">
             Get Started <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -46,6 +46,7 @@ const HeroSection = () => {
             Watch Demo
           </Button>
         </div>
+
         <div className="hero-image-wrapper mt-5 md:mt-0"> 
           <div ref={imageRef} className="hero-image"> 
             <Image 

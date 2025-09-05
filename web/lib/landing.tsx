@@ -9,8 +9,8 @@ import {
 
 export const statsData = [
   {
-    value: "10+ Yrs",
-    label: "Market Data Analyzed",
+    value: "10+",
+    label: "Years Market Data Analyzed",
   },
   {
     value: "1M+",

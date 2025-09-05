@@ -11,7 +11,7 @@ const CTASection = () => {
           Join thousands of investors using AI to gain smarter insights and make
           better financial decisions.
         </p>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
           <Button size="lg" className="rounded-2xl bg-white text-blue-600">
             Get Started Free
           </Button>
