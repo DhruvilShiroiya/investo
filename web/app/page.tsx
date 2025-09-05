@@ -1,17 +1,20 @@
-import HeroSection from "@/components/hero-section";
-import Features from "@/components/features-1";
-import ContentSection from "@/components/content-1";
-import CallToAction from "@/components/call-to-action";
-import FooterSection from "@/components/footer";
+import React from "react";
+import HeroSection from "@/components/dashboard/hero";
+import StatsSection from "@/components/dashboard/stats";
+import FeaturesSection from "@/components/dashboard/features";
+import HowItWorksSection from "@/components/dashboard/how-it-works";
+import CTASection from "@/components/dashboard/cta";
 
-export default function Home() {
+const LandingPage = () => {
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <HeroSection />
-      <Features />
-      <ContentSection />
-      <CallToAction />
-      <FooterSection />
-    </>
+      <StatsSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <CTASection />
+    </div>
   );
-}
+};
+
+export default LandingPage;
