@@ -14,9 +14,7 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
       <html lang="en">
-        <head>
-          <link rel="icon" href="/logo-sm.png" sizes="any" />
-        </head>
+
         <body className={`${inter.className}`}>
           <Header />
           <main className="min-h-screen">{children}</main>
