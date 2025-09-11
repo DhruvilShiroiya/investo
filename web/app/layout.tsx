@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/dashboard/header";
-import { Toaster } from "sonner";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +14,11 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
       <html lang="en">
-
         <body className={`${inter.className}`}>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Toaster richColors />
+          <Providers>
+            <Header />
+            <main className="min-h-screen">{children}</main>
+          </Providers>
         </body>
       </html>
   );
