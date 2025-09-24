@@ -30,27 +30,27 @@ export const statsData = [
 export const featuresData = [
   {
     icon: <BarChart3 className="h-8 w-8 text-blue-600" />,
-    title: "Stocks & Metals Portfolio Guidance",
+    title: "Stocks–Metals Correlation Insights",
     description:
-      "AI-driven insights to help you balance investments between stocks and metals.",
+      "Quantify co-movements between equities and metals to understand diversification.",
   },
   {
     icon: <Database className="h-8 w-8 text-blue-600" />,
-    title: "Historical News Sentiment Analysis",
+    title: "Historical & News Sentiment",
     description:
-      "Leverage years of market data and sentiment trends to make informed decisions.",
+      "Blend long-horizon data with current headlines to contextualize correlation shifts.",
   },
   {
     icon: <LineChart className="h-8 w-8 text-blue-600" />,
-    title: "Real-Time Market Trends",
+    title: "Real-Time Market Signals",
     description:
-      "Stay ahead with up-to-date price movements and performance dashboards.",
+      "Track live signals that may strengthen or weaken stocks–metals relationships.",
   },
   {
     icon: <Bot className="h-8 w-8 text-blue-600" />,
-    title: "AI Investment Chatbot",
+    title: "AI Insight Assistant",
     description:
-      "Chat with our ML-powered assistant to get personalized investment guidance.",
+      "Ask portfolio-aware questions and receive correlation-driven techniques.",
   },
   {
     icon: <Lock className="h-8 w-8 text-blue-600" />,
@@ -60,9 +60,9 @@ export const featuresData = [
   },
   {
     icon: <Sparkles className="h-8 w-8 text-blue-600" />,
-    title: "Personalized Insights",
+    title: "Portfolio-Tailored Techniques",
     description:
-      "Get actionable strategies tailored to your portfolio and goals.",
+      "Receive informational techniques aligned with your current holdings. Not investing advice.",
   },
 ];
 
@@ -72,18 +72,18 @@ export const howItWorksData = [
     icon: <Lock className="h-8 w-8 text-blue-600" />,
     title: "1. Sign Up Securely",
     description:
-      "Create your account with secure authentication and start your journey.",
+      "Create your account and keep your portfolio data private.",
   },
   {
     icon: <Database className="h-8 w-8 text-blue-600" />,
     title: "2. Connect & Analyze",
     description:
-      "Sync your portfolio or upload data. Our AI models analyze historical and live data.",
+      "Sync your portfolio or upload data. We compute stocks–metals correlations and trends.",
   },
   {
     icon: <Bot className="h-8 w-8 text-blue-600" />,
-    title: "3. Get AI-Powered Guidance",
+    title: "3. Explore AI-Powered Insights",
     description:
-      "Chat with the assistant and explore dashboards for smart investment decisions.",
+      "Chat and use dashboards for informational techniques. We are not an investing platform.",
   },
 ];
