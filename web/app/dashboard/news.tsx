@@ -25,17 +25,25 @@ const News = () => {
 
         const items: Article[] =
           Array.isArray(json?.articles) && json.articles.length > 0
-            ? json.articles.map((a: any) => ({
-                title: a.title ?? "Untitled",
-                description: a.description ?? "",
-              }))
+            ? json.articles.map((a: unknown) => {
+                // Narrow unknown into a predictable shape
+                const obj = a as { title?: unknown; description?: unknown };
+                return {
+                  title: typeof obj.title === "string" ? obj.title : "Untitled",
+                  description: typeof obj.description === "string" ? obj.description : "",
+                } as Article;
+              })
             : [];
 
         setArticles(items);
-      } catch (e: any) {
-        if (e.name === "AbortError") return;
+      } catch (e: unknown) {
+        // Safely check for AbortError without using `any`
+        const maybeName = (e as { name?: unknown })?.name;
+        if (maybeName === "AbortError") return;
+
         console.error("Fetch error:", e);
-        setErr(e?.message ?? "Failed to fetch");
+        const message = e instanceof Error ? e.message : String(e);
+        setErr(message ?? "Failed to fetch");
       } finally {
         setLoading(false);
       }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 export type Article = {
   title: string;
@@ -9,8 +9,8 @@ export type Article = {
 
 type Props = {
   articles: Article[];
-  intervalMs?: number;     // time between rotations
-  heightClass?: string;    // Tailwind height class for dialog, e.g. "h-28", "h-36"
+  intervalMs?: number; // time between rotations
+  heightClass?: string; // Tailwind height class for dialog, e.g. "h-28", "h-36"
   pauseOnHover?: boolean;
 };
 
@@ -26,41 +26,48 @@ export default function NewsRotator({
   const intervalRef = useRef<number | null>(null);
   const count = Math.max(0, articles?.length ?? 0);
 
-  // Advance function: animate out, swap index, animate in
-  const advance = (nextIndex?: number) => {
-    if (count <= 1) return;
-    setPhase("out");
-    // duration of 'out' should match CSS below (300ms)
-    window.setTimeout(() => {
-      setIndex((i) => {
-        if (typeof nextIndex === "number") return nextIndex % count;
-        return (i + 1) % count;
-      });
-      setPhase("in");
-      // after 'in' animation (300ms) return to idle
-      window.setTimeout(() => setPhase("idle"), 300);
-    }, 300);
-  };
+  // ✅ Memoized advance function (no stale closure warnings)
+  const advance = useCallback(
+    (nextIndex?: number) => {
+      if (count <= 1) return;
+      setPhase("out");
 
-  // Auto-rotation interval
+      // duration of 'out' should match CSS below (300ms)
+      window.setTimeout(() => {
+        setIndex((i) => {
+          if (typeof nextIndex === "number") return nextIndex % count;
+          return (i + 1) % count;
+        });
+        setPhase("in");
+
+        // after 'in' animation (300ms) return to idle
+        window.setTimeout(() => setPhase("idle"), 300);
+      }, 300);
+    },
+    [count]
+  );
+
+  // ✅ Auto-rotation interval (cleaned up + stable)
   useEffect(() => {
     if (intervalRef.current) {
       window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
+
     if (count > 1) {
       intervalRef.current = window.setInterval(() => {
         if (!pausedRef.current) advance();
       }, intervalMs);
     }
+
     return () => {
       if (intervalRef.current) {
         window.clearInterval(intervalRef.current);
       }
     };
-  }, [count, intervalMs]);
+  }, [count, intervalMs, advance]);
 
-  // reset index when articles change
+  // Reset index and phase when articles change
   useEffect(() => {
     setIndex(0);
     setPhase("idle");
@@ -68,9 +75,7 @@ export default function NewsRotator({
 
   const current = count > 0 ? articles[index] : undefined;
 
-  // CSS transforms for the phases (we use inline style for transform + opacity)
-  // out: slide up and fade out
-  // in: start slightly below and faded, then slide to place & fade in
+  // Animation styles for transitions
   const contentStyle: React.CSSProperties = (() => {
     if (phase === "out") {
       return {
@@ -86,7 +91,6 @@ export default function NewsRotator({
         transition: "transform 300ms ease, opacity 300ms ease",
       };
     }
-    // idle - fully visible
     return {
       transform: "translateY(0)",
       opacity: 1,
@@ -104,7 +108,7 @@ export default function NewsRotator({
         onMouseEnter={() => (pauseOnHover ? (pausedRef.current = true) : null)}
         onMouseLeave={() => (pauseOnHover ? (pausedRef.current = false) : null)}
       >
-        {/* single content area: always render only the current article */}
+        {/* Single content area: always render only the current article */}
         <div className="absolute inset-0 flex items-center p-4">
           <div className="w-full" style={{ minHeight: 0 }}>
             <div style={contentStyle}>
