@@ -1,0 +1,65 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import NewsRotator, { Article } from "@/components/NewsAnimation/NewsRotator";
+
+const News = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const load = async () => {
+      setLoading(true);
+      setErr(null);
+      try {
+        const res = await fetch("/api/news", { signal });
+        if (!res.ok) {
+          const txt = await res.text().catch(() => "");
+          throw new Error(`Status ${res.status}: ${txt}`);
+        }
+        const json = await res.json();
+
+        const items: Article[] =
+          Array.isArray(json?.articles) && json.articles.length > 0
+            ? json.articles.map((a: any) => ({
+                title: a.title ?? "Untitled",
+                description: a.description ?? "",
+              }))
+            : [];
+
+        setArticles(items);
+      } catch (e: any) {
+        if (e.name === "AbortError") return;
+        console.error("Fetch error:", e);
+        setErr(e?.message ?? "Failed to fetch");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+    return () => controller.abort();
+  }, []);
+
+  return (
+    <div className="flex justify-center mt-[80px]">
+      <div className="w-full max-w-lg">
+        {loading ? (
+          <div className="p-6 bg-white rounded shadow text-center">Loading news…</div>
+        ) : err ? (
+          <div className="p-6 bg-white rounded shadow text-red-600">Error: {err}</div>
+        ) : articles.length === 0 ? (
+          <div className="p-6 bg-white rounded shadow text-gray-600">No news available.</div>
+        ) : (
+          <NewsRotator articles={articles} intervalMs={5000} heightClass="h-28" />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default News;
