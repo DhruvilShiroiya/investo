@@ -54,8 +54,8 @@ const News = () => {
   }, []);
 
   return (
-    <div className="flex justify-center mt-[80px]">
-      <div className="w-full max-w-lg">
+    <div className="w-full mt-[70px]">
+      <div className="w-full">
         {loading ? (
           <div className="p-6 bg-white rounded shadow text-center">Loading news…</div>
         ) : err ? (
@@ -63,11 +63,13 @@ const News = () => {
         ) : articles.length === 0 ? (
           <div className="p-6 bg-white rounded shadow text-gray-600">No news available.</div>
         ) : (
-          <NewsRotator articles={articles} intervalMs={5000} heightClass="h-28" />
+          <div className="w-full">
+            <NewsRotator articles={articles} intervalMs={5000} heightClass="h-20" />
+          </div>
         )}
       </div>
     </div>
-  );
+  );  
 };
 
 export default News;
