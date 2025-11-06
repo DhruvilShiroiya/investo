@@ -99,7 +99,7 @@ export default function NewsRotator({
   })();
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full">
       <div
         role="dialog"
         aria-roledescription="news rotator"
@@ -109,10 +109,10 @@ export default function NewsRotator({
         onMouseLeave={() => (pauseOnHover ? (pausedRef.current = false) : null)}
       >
         {/* Single content area: always render only the current article */}
-        <div className="absolute inset-0 flex items-center p-4">
+        <div className="absolute inset-0 flex items-center justify-center p-4">
           <div className="w-full" style={{ minHeight: 0 }}>
             <div style={contentStyle}>
-              <h3 className="text-base font-semibold text-gray-900 leading-tight">
+              <h3 className="text-base font-semibold text-gray-900 leading-tight text-center">
                 {current?.title ?? "No title"}
               </h3>
             </div>
