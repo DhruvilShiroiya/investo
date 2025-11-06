@@ -7,6 +7,12 @@ type Markets = {
   goldSilver: { date: string; gold: number; silver: number }[];
 };
 
+type Series = {
+  name: string;
+  color: string;
+  points: { x: number; y: number }[];
+};
+
 const GraphsPage = () => {
   const [data, setData] = useState<Markets | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +38,7 @@ const GraphsPage = () => {
     return () => controller.abort();
   }, []);
 
-  const niftySensexSeries = useMemo(() => {
+  const niftySensexSeries = useMemo((): Series[] => {
     if (!data) return [];
     const pointsX = data.niftySensex.map((d, i) => i);
     return [
@@ -49,7 +55,7 @@ const GraphsPage = () => {
     ];
   }, [data]);
 
-  const goldSilverSeries = useMemo(() => {
+  const goldSilverSeries = useMemo((): Series[] => {
     if (!data) return [];
     const pointsX = data.goldSilver.map((d, i) => i);
     return [
@@ -82,7 +88,7 @@ const GraphsPage = () => {
           ) : error ? (
             <div className="h-64 grid place-items-center text-red-600">{error}</div>
           ) : (
-            <LineChart height={280} series={niftySensexSeries as any} />
+            <LineChart height={280} series={niftySensexSeries} />
           )}
         </div>
         <div className="bg-white border rounded-lg shadow p-4">
@@ -98,7 +104,7 @@ const GraphsPage = () => {
           ) : error ? (
             <div className="h-64 grid place-items-center text-red-600">{error}</div>
           ) : (
-            <LineChart height={280} series={goldSilverSeries as any} />
+            <LineChart height={280} series={goldSilverSeries} />
           )}
         </div>
       </div>

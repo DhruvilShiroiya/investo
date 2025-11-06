@@ -10,6 +10,12 @@ type Markets = {
   goldSilver: { date: string; gold: number; silver: number }[];
 };
 
+type Series = {
+  name: string;
+  color: string;
+  points: { x: number; y: number }[];
+};
+
 const Page = () => {
   return (
     <div className="w-full">
@@ -107,8 +113,8 @@ function ChartsSection() {
     return () => controller.abort();
   }, []);
 
-  const niftySensexSeries = useMemo(() => {
-    if (!data) return [] as any[];
+  const niftySensexSeries = useMemo((): Series[] => {
+    if (!data) return [];
     const pointsX = data.niftySensex.map((_, i) => i);
     return [
       { name: "Nifty", color: "#2563EB", points: data.niftySensex.map((d, i) => ({ x: pointsX[i], y: d.nifty })) },
@@ -116,8 +122,8 @@ function ChartsSection() {
     ];
   }, [data]);
 
-  const goldSilverSeries = useMemo(() => {
-    if (!data) return [] as any[];
+  const goldSilverSeries = useMemo((): Series[] => {
+    if (!data) return [];
     const pointsX = data.goldSilver.map((_, i) => i);
     return [
       { name: "Gold", color: "#2563EB", points: data.goldSilver.map((d, i) => ({ x: pointsX[i], y: d.gold })) },
@@ -153,7 +159,7 @@ function ChartsSection() {
         ) : error ? (
           <div className="h-64 grid place-items-center text-red-600">{error}</div>
         ) : (
-          <LineChart height={300} series={niftySensexSeries as any} xLabels={niftyDates} />
+          <LineChart height={300} series={niftySensexSeries} xLabels={niftyDates} />
         )}
       </div>
 
@@ -169,7 +175,7 @@ function ChartsSection() {
         ) : error ? (
           <div className="h-64 grid place-items-center text-red-600">{error}</div>
         ) : (
-          <LineChart height={300} series={goldSilverSeries as any} xLabels={metalDates} />
+          <LineChart height={300} series={goldSilverSeries} xLabels={metalDates} />
         )}
       </div>
     </div>
